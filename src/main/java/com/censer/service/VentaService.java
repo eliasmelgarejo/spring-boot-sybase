@@ -1,0 +1,79 @@
+package com.censer.service;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.censer.domain.OrdenDTO;
+import com.censer.domain.Venta;
+import com.censer.repository.VentaRepository;
+
+@Service
+@Transactional
+public class VentaService {
+	
+	@Autowired
+	private VentaRepository repo;
+	
+	public List<Venta> findAll(){
+		return repo.findAll();
+	}
+	
+	public int getDiasHabiles(Date inicio, Date fin) {
+		return repo.getDiasHabiles(inicio, fin);
+	}
+	
+	public int getDiasHabilesEnero() {
+		Date inicio = new Date(2021,1,1);
+		Date fin = new Date(2021, 1, 31);
+		return repo.getDiasHabiles(inicio, fin);
+	}
+	
+	public List<OrdenDTO> findAllSinSalida() {
+		ArrayList<Object> lista = repo.getOrdenesAbiertasCasaCentral();
+		List<OrdenDTO> listaDTO = new ArrayList<OrdenDTO>();
+
+		for (int i = 0; i < lista.toArray().length; i++) {
+			Object[] element = (Object[]) lista.toArray()[i];
+			
+			OrdenDTO dto = new OrdenDTO();
+			dto.setNroorden(element[0].toString());
+			dto.setAsesor(element[1].toString());
+			dto.setApertura(element[2].toString());
+			//dto.setSalida(element[3].toString());
+			dto.setDiasentaller(Integer.parseInt(element[4].toString()));
+			dto.setMocargadas(Integer.parseInt(element[5].toString()));
+			dto.setContrabajos(Integer.parseInt(element[6].toString()));
+			dto.setTerminados(Integer.parseInt(element[7].toString()));
+			dto.setEstado(element[8].toString());
+			dto.setMarcmodever(element[9].toString());
+			dto.setChasis(element[10].toString());
+			dto.setCliente(element[11].toString());
+			dto.setTiposervicio(element[12].toString());
+			dto.setSeccion(element[13].toString());
+			if(element[14]==null) {
+				dto.setFechaterminado("");
+			}
+			else{
+				dto.setFechaterminado(element[14].toString());
+			}
+			if(element[15]==null) {
+				dto.setHorasterminado("0");
+			}
+			else{
+				dto.setHorasterminado(element[15].toString());
+			}
+			
+			listaDTO.add(dto);
+		}
+		
+		return listaDTO;
+	}
+
+}
