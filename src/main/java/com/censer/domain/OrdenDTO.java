@@ -23,4 +23,7 @@ public class OrdenDTO {
 	private String seccion;
 	private String fechaterminado;
 	private String horasterminado;
+	private String sucursal;
+	private String marca;
+	private String situacion;
 }

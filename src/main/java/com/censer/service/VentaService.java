@@ -69,6 +69,9 @@ public class VentaService {
 			else{
 				dto.setHorasterminado(element[15].toString());
 			}
+			dto.setSucursal(element[16].toString());
+			dto.setMarca(element[17].toString());
+			dto.setSituacion(element[18].toString());
 			
 			listaDTO.add(dto);
 		}
