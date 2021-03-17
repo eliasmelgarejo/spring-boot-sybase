@@ -22,6 +22,11 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
 	@Modifying
 	@Query(value = "SELECT * FROM vw_ordenes_para_estatus_taller;", nativeQuery = true)
 	public ArrayList<Object> getOrdenesAbiertasCasaCentral();
+	
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT * FROM vw_res_ent_sal_para_status_taller;", nativeQuery = true)
+	public ArrayList<Object> getOTResEntSal();
 	 
 	
 }

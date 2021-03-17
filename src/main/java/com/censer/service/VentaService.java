@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.censer.domain.OTResumen;
 import com.censer.domain.OrdenDTO;
 import com.censer.domain.Venta;
 import com.censer.repository.VentaRepository;
@@ -55,8 +56,16 @@ public class VentaService {
 			dto.setMarcmodever(element[9].toString());
 			dto.setChasis(element[10].toString());
 			dto.setCliente(element[11].toString());
-			dto.setTiposervicio(element[12].toString());
-			dto.setSeccion(element[13].toString());
+			if(element[12]==null) {
+				dto.setTiposervicio("MECÁNICA");
+			}else {
+				dto.setTiposervicio(element[12].toString());
+			}
+			if(element[13]==null) {
+				dto.setSeccion("MEC");
+			}else {
+				dto.setSeccion(element[13].toString());
+			}
 			if(element[14]==null) {
 				dto.setFechaterminado("");
 			}
@@ -72,6 +81,30 @@ public class VentaService {
 			dto.setSucursal(element[16].toString());
 			dto.setMarca(element[17].toString());
 			dto.setSituacion(element[18].toString());
+			if(element[19]==null) {
+				dto.setChapa("");
+			}
+			else{
+				dto.setChapa(element[19].toString());
+			}
+			
+			listaDTO.add(dto);
+		}
+		
+		return listaDTO;
+	}
+	
+	public List<OTResumen> getResCurrentWeek(){
+		ArrayList<Object> lista = repo.getOTResEntSal();
+		List<OTResumen> listaDTO = new ArrayList<OTResumen>();
+		
+		for (int i = 0; i < lista.toArray().length; i++) {
+			Object[] element = (Object[]) lista.toArray()[i];			
+			
+			OTResumen dto = new OTResumen();
+			dto.setType(element[0].toString());
+			dto.setDay_week_name(element[1].toString());
+			dto.setCount(element[2].toString());
 			
 			listaDTO.add(dto);
 		}

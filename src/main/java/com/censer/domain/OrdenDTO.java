@@ -26,4 +26,5 @@ public class OrdenDTO {
 	private String sucursal;
 	private String marca;
 	private String situacion;
+	private String chapa;
 }

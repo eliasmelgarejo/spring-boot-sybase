@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.censer.domain.OTResumen;
 import com.censer.domain.OrdenDTO;
 import com.censer.domain.Venta;
 import com.censer.service.VentaService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://10.0.10.129:3000","http://localhost:3000"})
 public class HomeController {
 	
 	@Autowired
@@ -51,4 +52,8 @@ public class HomeController {
 		return service.findAllSinSalida();
 	}
 	
+	@GetMapping("/resumensemana")
+	public List<OTResumen> getResumenSemana(){
+		return service.getResCurrentWeek();	
+	}
 }
