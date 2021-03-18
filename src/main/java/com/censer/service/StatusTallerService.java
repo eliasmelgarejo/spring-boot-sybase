@@ -1,9 +1,7 @@
 package com.censer.service;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.censer.domain.OTResumen;
 import com.censer.domain.OrdenDTO;
-import com.censer.domain.Venta;
-import com.censer.repository.VentaRepository;
+import com.censer.repository.StatusTallerRepository;
 
 @Service
 @Transactional
-public class VentaService {
+public class StatusTallerService {
 	
 	@Autowired
-	private VentaRepository repo;
-	
-	public List<Venta> findAll(){
-		return repo.findAll();
-	}
+	private StatusTallerRepository repo;
+		
 	
 	public int getDiasHabiles(Date inicio, Date fin) {
 		return repo.getDiasHabiles(inicio, fin);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public int getDiasHabilesEnero() {
 		Date inicio = new Date(2021,1,1);
 		Date fin = new Date(2021, 1, 31);

@@ -12,27 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.censer.domain.OTResumen;
 import com.censer.domain.OrdenDTO;
-import com.censer.domain.Venta;
-import com.censer.service.VentaService;
+import com.censer.service.StatusTallerService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class HomeController {
+public class StatusTallerController {
 	
 	@Autowired
-	private VentaService service;
+	private StatusTallerService service;
 //	@Autowired
 //	private OrdenService ordenService;
 
 	@GetMapping("/home")
 	public String home() {
 		return "hola";
-	}
-	
-	@GetMapping("/ventas")
-	public List<Venta> getVentas(){
-		return service.findAll();
 	}
 	
 	@GetMapping("/diashabiles")

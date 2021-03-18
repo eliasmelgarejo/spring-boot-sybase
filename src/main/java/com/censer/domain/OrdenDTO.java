@@ -1,7 +1,5 @@
 package com.censer.domain;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
