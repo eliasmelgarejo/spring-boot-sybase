@@ -25,8 +25,8 @@ public class StatusTallerController {
 //	private OrdenService ordenService;
 
 	@GetMapping("/home")
-	public String home() {
-		return "hola";
+	public String home(@RequestParam(value="name",defaultValue="World") String name) {
+		return "hola "+name+"!!!";
 	}
 	
 	@GetMapping("/diashabiles")
@@ -49,5 +49,10 @@ public class StatusTallerController {
 	@GetMapping("/resumensemana")
 	public List<OTResumen> getResumenSemana(){
 		return service.getResCurrentWeek();	
+	}
+	
+	@GetMapping("/login")
+	public boolean login(@RequestParam String username, @RequestParam String password) {
+		return service.isLogin(username, password);
 	}
 }

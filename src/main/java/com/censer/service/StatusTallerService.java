@@ -97,9 +97,10 @@ public class StatusTallerService {
 			Object[] element = (Object[]) lista.toArray()[i];			
 			
 			OTResumen dto = new OTResumen();
-			dto.setType(element[0].toString());
-			dto.setDay_week_name(element[1].toString());
-			dto.setCount(element[2].toString());
+			dto.setDay(Integer.parseInt(element[0].toString()));
+			dto.setType(element[1].toString());
+			dto.setDay_week_name(element[2].toString());
+			dto.setCount(element[3].toString());
 			
 			listaDTO.add(dto);
 		}
@@ -107,4 +108,17 @@ public class StatusTallerService {
 		return listaDTO;
 	}
 
+	public boolean isLogin(String username, String password) {
+		try {
+			int result = repo.getLogin(username, password);
+			System.out.println("isLogin return...");
+			System.out.println(result);
+			if(result>0) return true;			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error en LoginService!!!");
+			System.out.println(e.toString());
+		}
+		return false;
+	}
 }
