@@ -82,6 +82,16 @@ public class StatusTallerService {
 			else{
 				dto.setChapa(element[19].toString());
 			}
+			if(element[20]==null) {
+				dto.setPrioridad("NO");
+			}
+			else{
+				if(element[20].toString().toUpperCase().equals("S")) {
+					dto.setPrioridad("SI");
+				}else {
+					dto.setPrioridad("NO");
+				}
+			}
 			
 			listaDTO.add(dto);
 		}

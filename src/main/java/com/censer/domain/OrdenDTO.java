@@ -25,4 +25,5 @@ public class OrdenDTO {
 	private String marca;
 	private String situacion;
 	private String chapa;
+	private String prioridad;
 }
