@@ -33,12 +33,12 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			
 			System.out.println("request.getRequestURI():"+request.getRequestURI());
 			
-			Iterator<String> itr = request.getHeaderNames().asIterator();
-			
-			while(itr.hasNext()) {
-				Object element = itr.next();
-				System.out.println("propiedad en headers: "+element+": "+request.getHeader(element+""));
-			}
+//			Iterator<String> itr = request.getHeaderNames().asIterator();
+//			
+//			while(itr.hasNext()) {
+//				Object element = itr.next();
+//				System.out.println("propiedad en headers: "+element+": "+request.getHeader(element+""));
+//			}
 			
 			if (checkJWTToken(request, response)) {
 				Claims claims = validateToken(request);

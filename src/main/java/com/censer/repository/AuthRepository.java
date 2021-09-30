@@ -11,7 +11,7 @@ import com.censer.domain.Venta;
 public interface AuthRepository extends JpaRepository<Venta, Long>{
 
 	
-	@Query(value = "SELECT sti.f_login_statustaller(:username,:password);", nativeQuery = true)
+	@Query(value = "SELECT dba.f_login_statustaller(:username,:password);", nativeQuery = true)
 	public Integer login(@Param("username") String username, @Param("password") String password);
 
 }

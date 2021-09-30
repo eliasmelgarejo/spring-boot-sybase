@@ -113,7 +113,9 @@ public class StatusTallerService {
 			dto.setCount(element[3].toString());
 			
 			listaDTO.add(dto);
+			System.out.println("DTO:"+dto.getDay()+","+dto.getType()+", "+dto.getDay_week_name()+"");
 		}
+		
 		
 		return listaDTO;
 	}
