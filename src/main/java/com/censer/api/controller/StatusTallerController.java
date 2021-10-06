@@ -40,12 +40,18 @@ public class StatusTallerController {
 		return service.getDiasHabilesEnero();
 	}
 	
-	//@CrossOrigin
 	@GetMapping("/ordenes")
 	public List<OrdenDTO> getOrdenes(){
 		return service.findAllSinSalida();
 	}
 	
+	@GetMapping("/ordenesporsucursal")
+	public List<OrdenDTO> getOrdenesPorSucursal(@RequestParam(value="sucursal") String sucursal){
+		System.out.println("getOrdenesPorSucursal");
+		System.out.println("@RequestParam: "+sucursal);
+		return service.findAllSinSalidaPorSucursal(sucursal);
+	}
+			
 	@GetMapping("/resumensemana")
 	public List<OTResumen> getResumenSemana(){
 		return service.getResCurrentWeek();	

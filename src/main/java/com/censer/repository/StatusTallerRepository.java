@@ -21,8 +21,13 @@ public interface StatusTallerRepository extends JpaRepository<Venta, Long>{
 	
 	@Transactional
 	@Modifying
-	@Query(value = "SELECT * FROM dba.vw_ordenes_para_estatus_taller;", nativeQuery = true)
+	@Query(value = "SELECT * FROM dba.vw_ordenes_para_estatus_taller where SUCURSAL='CR CENSER';", nativeQuery = true)
 	public ArrayList<Object> getOrdenesAbiertasCasaCentral();
+	
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT * FROM dba.vw_ordenes_para_estatus_taller where SUCURSAL = :sucursal", nativeQuery = true)
+	public ArrayList<Object> getOrdenesAbiertasPorSucursal(@Param("sucursal") String sucursal);
 	
 	@Transactional
 	@Modifying
@@ -31,4 +36,7 @@ public interface StatusTallerRepository extends JpaRepository<Venta, Long>{
 	
 	@Query(value = "SELECT dba.f_login_statustaller('springapi','springapi123');", nativeQuery = true)
 	public int getLogin(@Param("username") String username, @Param("password") String password);
+	
+	@Query(value = "SELECT SUCURSAL FROM SUCURSALES WHERE EMPRESA=1 AND ACTIVO='s' AND DESCRIPCION like :sucursal", nativeQuery = true)
+	public int getCodSucursal(@Param("sucursal") String sucursal);
 }

@@ -99,6 +99,85 @@ public class StatusTallerService {
 		return listaDTO;
 	}
 	
+	public List<OrdenDTO> findAllSinSalidaPorSucursal(String sucursal) {
+
+		System.out.println("Buscar sucursal por nombre...");
+		System.out.println("Sucursal: "+sucursal);
+		ArrayList<Object> lista = repo.getOrdenesAbiertasPorSucursal(sucursal);
+		List<OrdenDTO> listaDTO = new ArrayList<OrdenDTO>();
+
+		for (int i = 0; i < lista.toArray().length; i++) {
+			Object[] element = (Object[]) lista.toArray()[i];
+			
+			OrdenDTO dto = new OrdenDTO();
+			dto.setNroorden(element[0].toString());
+			dto.setAsesor(element[1].toString());
+			dto.setApertura(element[2].toString());
+			//dto.setSalida(element[3].toString());
+			dto.setDiasentaller(Integer.parseInt(element[4].toString()));
+			dto.setMocargadas(Integer.parseInt(element[5].toString()));
+			dto.setContrabajos(Integer.parseInt(element[6].toString()));
+			dto.setTerminados(Integer.parseInt(element[7].toString()));
+			dto.setEstado(element[8].toString());
+			dto.setMarcmodever(element[9].toString());
+			if(element[10]==null) {
+				dto.setChasis("");				
+			}else {
+				dto.setChasis(element[10].toString());
+			}
+			if(element[11]==null) {
+				dto.setCliente("");
+			}else {
+				dto.setCliente(element[11].toString());
+			}
+			if(element[12]==null) {
+				dto.setTiposervicio("MECÁNICA");
+			}else {
+				dto.setTiposervicio(element[12].toString());
+			}
+			if(element[13]==null) {
+				dto.setSeccion("MEC");
+			}else {
+				dto.setSeccion(element[13].toString());
+			}
+			if(element[14]==null) {
+				dto.setFechaterminado("");
+			}
+			else{
+				dto.setFechaterminado(element[14].toString());
+			}
+			if(element[15]==null) {
+				dto.setHorasterminado("0");
+			}
+			else{
+				dto.setHorasterminado(element[15].toString());
+			}
+			dto.setSucursal(element[16].toString());
+			dto.setMarca(element[17].toString());
+			dto.setSituacion(element[18].toString());
+			if(element[19]==null) {
+				dto.setChapa("");
+			}
+			else{
+				dto.setChapa(element[19].toString());
+			}
+			if(element[20]==null) {
+				dto.setPrioridad("NO");
+			}
+			else{
+				if(element[20].toString().toUpperCase().equals("S")) {
+					dto.setPrioridad("SI");
+				}else {
+					dto.setPrioridad("NO");
+				}
+			}
+			
+			listaDTO.add(dto);
+		}
+		
+		return listaDTO;
+	}
+	
 	public List<OTResumen> getResCurrentWeek(){
 		ArrayList<Object> lista = repo.getOTResEntSal();
 		List<OTResumen> listaDTO = new ArrayList<OTResumen>();
@@ -107,13 +186,19 @@ public class StatusTallerService {
 			Object[] element = (Object[]) lista.toArray()[i];			
 			
 			OTResumen dto = new OTResumen();
-			dto.setDay(Integer.parseInt(element[0].toString()));
-			dto.setType(element[1].toString());
-			dto.setDay_week_name(element[2].toString());
-			dto.setCount(element[3].toString());
+			
+			if(element[0]==null) {
+				dto.setSucursal("");
+			}else {
+				dto.setSucursal(element[0].toString());
+			}
+			dto.setDay(Integer.parseInt(element[1].toString()));
+			dto.setType(element[2].toString());
+			dto.setDay_week_name(element[3].toString());
+			dto.setCount(element[4].toString());
 			
 			listaDTO.add(dto);
-			System.out.println("DTO:"+dto.getDay()+","+dto.getType()+", "+dto.getDay_week_name()+"");
+			System.out.println("Sucursal:"+"DTO:"+dto.getSucursal()+","+dto.getDay()+","+dto.getType()+", "+dto.getDay_week_name()+"");
 		}
 		
 		
