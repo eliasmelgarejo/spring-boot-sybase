@@ -32,7 +32,7 @@ public class StatusTallerService {
 	}
 	
 	public List<OrdenDTO> findAllSinSalida() {
-		ArrayList<Object> lista = repo.getOrdenesAbiertasCasaCentral();
+		ArrayList<Object> lista = repo.getAllOrdenesAbiertas();
 		List<OrdenDTO> listaDTO = new ArrayList<OrdenDTO>();
 
 		for (int i = 0; i < lista.toArray().length; i++) {
@@ -50,7 +50,11 @@ public class StatusTallerService {
 			dto.setEstado(element[8].toString());
 			dto.setMarcmodever(element[9].toString());
 			dto.setChasis(element[10].toString());
-			dto.setCliente(element[11].toString());
+			if(element[11]==null) {
+				dto.setCliente("");
+			}else {
+				dto.setCliente(element[11].toString());
+			}
 			if(element[12]==null) {
 				dto.setTiposervicio("MECÁNICA");
 			}else {
@@ -180,15 +184,16 @@ public class StatusTallerService {
 	
 	public List<OTResumen> getResCurrentWeek(){
 		ArrayList<Object> lista = repo.getOTResEntSal();
+				
 		List<OTResumen> listaDTO = new ArrayList<OTResumen>();
 		
 		for (int i = 0; i < lista.toArray().length; i++) {
 			Object[] element = (Object[]) lista.toArray()[i];			
 			
 			OTResumen dto = new OTResumen();
-			
+			System.out.println();
 			if(element[0]==null) {
-				dto.setSucursal("");
+				dto.setSucursal("*");
 			}else {
 				dto.setSucursal(element[0].toString());
 			}
@@ -198,11 +203,17 @@ public class StatusTallerService {
 			dto.setCount(element[4].toString());
 			
 			listaDTO.add(dto);
-			System.out.println("Sucursal:"+"DTO:"+dto.getSucursal()+","+dto.getDay()+","+dto.getType()+", "+dto.getDay_week_name()+"");
+			System.out.println("Sucursal:"+dto.getSucursal()+","+dto.getDay()+","+dto.getType()+", "+dto.getDay_week_name()+"");
 		}
 		
 		
 		return listaDTO;
+	}
+	
+	public List<String> getSucursalesActivas(){
+		List<String> lista = repo.getSucursalesActivas();
+		System.out.println(lista);
+		return lista;
 	}
 
 	public boolean isLogin(String username, String password) {

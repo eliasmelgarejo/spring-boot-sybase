@@ -45,6 +45,12 @@ public class StatusTallerController {
 		return service.findAllSinSalida();
 	}
 	
+	@GetMapping("/sucursales")
+	public List<String> getSucursalesActivas(){
+		System.out.println("getSucursalesActivas");
+		return service.getSucursalesActivas();
+	}
+	
 	@GetMapping("/ordenesporsucursal")
 	public List<OrdenDTO> getOrdenesPorSucursal(@RequestParam(value="sucursal") String sucursal){
 		System.out.println("getOrdenesPorSucursal");
